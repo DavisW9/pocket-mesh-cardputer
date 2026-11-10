@@ -1,0 +1,26 @@
+{
+  "package_name": "cardputerzero-mesh",
+  "version": "0.1.0",
+  "app_name": "Mesh for CardputerZero",
+  "bin_name": "mesh-ui",
+  "description": "On-device Meshtastic messaging with the LoRa-1262 Cap",
+  "store": {
+    "summary": "Send and receive Meshtastic messages with your CardputerZero.",
+    "description": "Use the built-in keyboard for channel messages and direct messages. Browse nearby mesh nodes, see the Cap's GNSS position, and manage radio and channel settings. Requires the M5Stack LoRa-1262 Cap. The mesh radio runs while the app is open.",
+    "categories": ["Radio & Comms"],
+    "screenshots": ["assets/inbox.png"],
+    "icon": "assets/cardputerzero-mesh.png",
+    "license": "GPL-3.0-only",
+    "author": {"display_name": "Davis"},
+    "share_code": "MSH0",
+    "permissions": {
+      "camera": false,
+      "microphone": false,
+      "imu": false,
+      "network": false,
+      "additional_hardware": true,
+      "background_service": false,
+      "external_display": false
+    }
+  }
+}

@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+base=/usr/lib/cardputerzero-mesh
+exec /usr/bin/python3 "$base/mesh.py" --ui "$base/mesh-ui" --radio "$base/meshtasticd" --config "$base/cardputerzero.yaml" --loopback "$base/libmesh-loopback.so"

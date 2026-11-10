@@ -1,0 +1,11 @@
+/build/
+/dist/
+/videos/
+__pycache__/
+*.pyc
+.DS_Store
+videos/**/AGENTS.md
+videos/**/CLAUDE.md
+videos/**/.hyperframes/
+videos/**/.thumbnails/
+videos/**/renders/

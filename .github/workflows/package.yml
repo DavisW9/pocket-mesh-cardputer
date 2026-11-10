@@ -1,0 +1,36 @@
+name: CardputerZero package
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04-arm
+    container: debian:13
+    steps:
+      - name: Install build tools
+        run: apt-get update && apt-get install -y build-essential ca-certificates cmake curl git python3-venv
+      - uses: actions/checkout@v4
+      - name: Build device app
+        run: |
+          cmake -S . -B build/arm64 -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/arm64 -j 4
+      - name: Vendor client and fetch daemon
+        run: |
+          python3 -m venv build/venv
+          build/venv/bin/pip install --no-deps --no-compile --only-binary=:all: --target build/python -r requirements-device.txt
+          curl --retry 2 -fL "$(head -n 1 packaging/meshtasticd.lock)" -o build/meshtasticd.deb
+      - name: Test and package
+        run: |
+          PYTHONPATH=build/python python3 -m unittest discover -s tests -v
+          python3 scripts/package.py --build build/arm64 --vendor build/python --daemon-deb build/meshtasticd.deb
+          dpkg-deb --info dist/*.deb
+          dpkg-deb --contents dist/*.deb > build/package-files.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cardputerzero-mesh-arm64
+          path: dist/*.deb

@@ -1,0 +1,16 @@
+Lora:
+  Module: sx1262
+  spidev: spidev0.1
+  spiSpeed: 1000000
+  gpiochip: 0
+  IRQ: 23
+  Reset: 26
+  Busy: 22
+  DIO2_AS_RF_SWITCH: true
+  DIO3_TCXO_VOLTAGE: 3.0
+GPS:
+  SerialPath: /dev/serial0
+Webserver:
+  Port: -1
+Logging:
+  LogLevel: info
